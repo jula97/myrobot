@@ -1,11 +1,7 @@
 # Launch files
 ```sh
-$ roslaunch diyazen_gazebo turtle_world.launch 
-$ roslaunch diyazen_navigation nav_stack.launch  
-```
-Optionally
-```
-$ roslaunch turtle_navigation teleop.launch 
+$ roslaunch myrobot_gazebo myrobot_world.launch 
+$ roslaunch myrobot_navigation nav_stack.launch  
 ```
 # Cliff Sensors
 1. Front
