@@ -1,0 +1,6 @@
+#Cliff data configuration parameters
+#cliff_mark_threshold -> Threshold for IR ranges above which to be considered as cliffs
+#cliff_mark_distance -> Range that should be published if a cliff is detected
+
+cliff_mark_threshold: 1.1
+cliff_mark_distance: 0.8

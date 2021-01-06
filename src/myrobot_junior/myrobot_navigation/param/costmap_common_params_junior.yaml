@@ -1,0 +1,29 @@
+robot_radius: 0.35
+robot_base_frame: base_footprint
+
+inflation_layer:
+  inflation_radius: 2.5
+  cost_scaling_factor: 4.0
+
+obstacle_layer:
+  max_obstacle_height: 0.8
+  obstacle_range: 1.5  
+  raytrace_range: 1.75
+  map_type: costmap
+  observation_sources: scan
+  scan: {sensor_frame: base_scan, data_type: LaserScan, topic: scan, marking: true, clearing: true}
+
+range_sensor_layer:
+  clear_threshold:    0.46
+  mark_threshold:     0.80
+  inflate_cone:  0.1
+  clear_on_max_reading: true
+  topics: ["/sensor/sonar_front","/sensor/ir_left_1","/sensor/ir_left_2","/sensor/ir_right_1","/sensor/ir_right_2","/sensor/sonar_back"]
+
+range_sensor_layer_cliff:
+  clear_threshold:    0.40
+  mark_threshold:     0.95
+  inflate_cone:  0.0
+  clear_on_max_reading: false
+  topics: ["/sensor/cliff_range_front","/sensor/cliff_range_back","/sensor/cliff_range_left_1","/sensor/cliff_range_right_1","/sensor/cliff_range_left_2","/sensor/cliff_range_right_2"]
+

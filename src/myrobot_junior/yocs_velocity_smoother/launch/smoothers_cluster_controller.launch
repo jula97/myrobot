@@ -1,0 +1,45 @@
+<!--
+  controller launcher for the velocity smoothers cluster (recomend to share same nodelet manager)
+  - nav twist
+  - joy_teleop twist
+  - keyboard_teleop twist
+  - android_teleop twist 
+ -->
+
+ <launch>
+
+  <arg name="navi_twist_active" default="true"/>
+  <arg name="joy_teleop_twist_active" default="true"/>
+
+  <arg name="nodelet_manager_name"  default="nodelet_manager"/>
+
+
+  <!-- nav velocity smoother -->
+  <group if="$(arg navi_twist_active)"> 
+  	  <arg name="ns" value="navi"/>
+	  <include file="$(find yocs_velocity_smoother)/launch/velocity_smoother.launch">
+	    <arg name="node_name"             value="$(arg ns)_velocity_smoother"/>
+	    <arg name="nodelet_manager_name"  value="$(arg nodelet_manager_name)"/>
+	    <arg name="config_file"           value="$(find yocs_velocity_smoother)/param/$(arg ns)_standalone.yaml"/>
+	    <arg name="raw_cmd_vel_topic"     value="cmd_vel/$(arg ns)"/>
+	    <arg name="smooth_cmd_vel_topic"  value="cmd_vel_smooth/$(arg ns)"/>
+	    <arg name="robot_cmd_vel_topic"   value="cmd_vel_smooth/$(arg ns)"/>
+	    <arg name="odom_topic"            value="odom"/>
+	  </include>
+  </group>
+
+  <!-- joy teleop velocity smoother -->
+  <group if="$(arg joy_teleop_twist_active)"> 
+  	  <arg name="ns" value="joy_teleop"/>
+	  <include file="$(find yocs_velocity_smoother)/launch/velocity_smoother.launch">
+	    <arg name="node_name"             value="$(arg ns)_velocity_smoother"/>
+	    <arg name="nodelet_manager_name"  value="$(arg nodelet_manager_name)"/>
+	    <arg name="config_file"           value="$(find yocs_velocity_smoother)/param/$(arg ns)_standalone.yaml"/>
+	    <arg name="raw_cmd_vel_topic"     value="cmd_vel/$(arg ns)"/>
+	    <arg name="smooth_cmd_vel_topic"  value="cmd_vel_smooth/$(arg ns)"/>
+	    <arg name="robot_cmd_vel_topic"   value="cmd_vel_smooth/$(arg ns)"/>
+	    <arg name="odom_topic"            value="odom"/>
+	  </include>
+  </group>
+</launch>
+

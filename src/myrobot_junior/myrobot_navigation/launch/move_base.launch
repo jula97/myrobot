@@ -1,0 +1,35 @@
+<launch>
+  <!-- Arguments -->
+  <arg name="model" default="bigman"/>
+  <arg name="no_static_map" default="false"/>
+  <arg name="local_planner" default="eband_local_planner"/>
+  <arg name="local_planner_value" default="eband_local_planner/EBandPlannerROS"/>
+  <!--arg name="local_planner" default="dwa_local_planner"/-->
+  <!--arg name="local_planner_value" default="dwa_local_planner/DWAPlannerROS"/-->
+  <!--arg name="local_planner" default="teb_local_planner"/-->
+  <!--arg name="local_planner_value" default="teb_local_planner/TebLocalPlannerROS"/-->
+  <arg name="global_planner" default="global_planner_params"/>
+  <arg name="global_planner_value" default="global_planner/GlobalPlanner"/>
+  <arg name="cmd_vel_topic" default="cmd_vel" />
+  <arg name="odom_topic" default="odom" />
+
+  <!-- move_base -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <param name="base_global_planner" value="$(arg global_planner_value)"/>
+    <param name="base_local_planner" value="$(arg local_planner_value)"/>
+    
+    <rosparam file="$(find myrobot_navigation)/param/costmap_common_params_$(arg model).yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find myrobot_navigation)/param/costmap_common_params_$(arg model).yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find myrobot_navigation)/param/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find myrobot_navigation)/param/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find myrobot_navigation)/param/move_base_params.yaml" command="load"/>   
+    <rosparam file="$(find myrobot_navigation)/param/local_planner/$(arg local_planner)_params_$(arg model).yaml" command="load"/>
+    <rosparam file="$(find myrobot_navigation)/param/global_planner/$(arg global_planner)_$(arg model).yaml" command="load"/>
+
+    <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
+    <remap from="odom" to="$(arg odom_topic)"/>
+
+  </node>
+</launch>
+
+

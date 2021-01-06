@@ -1,0 +1,27 @@
+<!--
+  YOCS Velocity Multiplexer launcher
+  -->
+
+<launch>
+  <arg name="nodelet_manager_name"  default="nodelet_manager"/>
+  <arg name="node_name" default="yocs_cmd_vel_mux"/>
+  <arg name="config_file"           default="$(find yocs_cmd_vel_mux)/param/mux_configure.yaml"/>
+  <arg name="input_cmd_vel_topic0" default="input/default"/>
+  <arg name="input_cmd_vel_topic1" default="input/navigation"/>
+  <arg name="input_cmd_vel_topic2" default="input/joyop"/>
+  <arg name="output_cmd_vel" default="output/cmd_vel"/>
+
+
+  <node pkg="nodelet" type="nodelet" name="$(arg node_name)"
+        args="load yocs_cmd_vel_mux/CmdVelMuxNodelet $(arg nodelet_manager_name)">
+    <param name="yaml_cfg_file" value="$(arg config_file)"/>
+
+    <!-- input velocity commands -->
+    <remap from="$(arg node_name)/$(arg input_cmd_vel_topic0)"  to="$(arg input_cmd_vel_topic0)"/>
+    <remap from="$(arg node_name)/$(arg input_cmd_vel_topic1)"  to="$(arg input_cmd_vel_topic1)"/>
+    <remap from="$(arg node_name)/$(arg input_cmd_vel_topic2)"  to="$(arg input_cmd_vel_topic2)"/>
+    
+    <!-- output velocity commands -->
+    <remap from="$(arg node_name)/$(arg output_cmd_vel)"  to="$(arg output_cmd_vel)"/>
+  </node>
+</launch>

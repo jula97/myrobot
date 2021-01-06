@@ -1,0 +1,9 @@
+<!-- ir_to_cliff-->
+<launch>
+
+
+    <node pkg="cliff_data" type="cliff_data_node" name="cliff_data_node">   
+    </node>
+    <rosparam file="$(find cliff_data)/param/cliff_param.yaml" />
+
+</launch>

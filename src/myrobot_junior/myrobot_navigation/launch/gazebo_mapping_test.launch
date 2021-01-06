@@ -1,0 +1,8 @@
+<launch>
+
+	<!--The gazebo environment-->
+	<include file="$(find myrobot_gazebo)/launch/myrobot_world.launch"/>
+	<!--Navigation stack + RViz-->
+	<include file="$(find myrobot_navigation)/launch/gmapping_demo.launch"/>
+
+</launch>
