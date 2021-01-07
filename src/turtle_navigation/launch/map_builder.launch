@@ -1,0 +1,12 @@
+<launch>
+
+	<!-- Gmapping -->
+	<include file="$(find turtle_navigation)/launch/gmapping.launch"/>
+
+	<!-- MoveBase-->
+	<include file="$(find turtle_navigation)/launch/movebase2.launch"/>
+
+	<!-- RViz-->
+	<include file="$(find turtle_description)/launch/turtle_rviz.launch" />
+
+</launch>

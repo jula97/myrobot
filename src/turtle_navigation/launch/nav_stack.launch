@@ -1,0 +1,24 @@
+<!-- Navigation Stack Launcher-->
+<launch>
+
+	<arg name="map_file" default="$(find turtle_navigation)/maps/cliffmap.yaml" />
+	<arg name="open_rviz" default="true" />
+
+	<master auto="start" />
+
+	<!-- AMCL -->
+	<include file="$(find turtle_navigation)/launch/amcl.launch" />
+
+	<!-- Map Server-->
+	<node pkg="map_server" type="map_server" name="map_server" args="$(arg map_file)" />
+
+	<!-- MoveBase-->
+	<include file="$(find turtle_navigation)/launch/movebase2.launch" />
+
+	<!-- RViz-->
+	<include file="$(find turtle_description)/launch/turtle_rviz.launch" />
+
+	<!-- ir_to_cliff-->
+	<include file="$(find cliff_data)/launch/ir_to_cliff.launch" />
+
+</launch>

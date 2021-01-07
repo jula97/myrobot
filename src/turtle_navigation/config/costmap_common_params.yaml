@@ -1,0 +1,22 @@
+robot_radius: 0.35
+
+inflation_layer:
+  inflation_radius: 1.3
+  cost_scaling_factor: 4.0
+
+obstacle_layer:
+  max_obstacle_height: 0.80
+  obstacle_range: 1.5
+  raytrace_range: 1.75
+  map_type: costmap
+
+  observation_sources: scan
+  scan: {sensor_frame: base_scan, data_type: LaserScan, topic: scan, marking: true, clearing: true}
+
+range_sensor_layer:
+  clear_threshold:    0.40
+  mark_threshold:     0.95
+  inflate_cone:  0.0
+  clear_on_max_reading: false
+  topics: ["/sensor/cliff_range_front","/sensor/cliff_range_back","/sensor/cliff_range_left_1","/sensor/cliff_range_right_1","/sensor/cliff_range_left_2","/sensor/cliff_range_right_2"]
+
